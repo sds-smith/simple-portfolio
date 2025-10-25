@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
+const { createElement } = require('react');
+const { renderToString } = require('react-dom/server');
 const Header = require('./components/header.js');
 const Footer = require('./components/footer.js');
 
@@ -20,10 +20,10 @@ const handleRequest = (page) => async (req, res) => {
         return res.send(
             data.replace(
                 `<header></header>`,
-                `<header>${ReactDOMServer.renderToString(React.createElement(Header))}</header>`
+                `<header>${renderToString(createElement(Header))}</header>`
             ).replace(
                 `<footer></footer>`,
-                `<footer>${ReactDOMServer.renderToString(React.createElement(Footer))}</footer>`
+                `<footer>${renderToString(createElement(Footer))}</footer>`
             )
         )
     })
