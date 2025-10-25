@@ -1,26 +1,38 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const React = require('react');
+const ReactDOMServer = require('react-dom/server');
+const Header = require('./components/header.js');
+const Footer = require('./components/footer.js');
 
 const app = express();
 const PORT = 80;
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'home.html'))
-})
+const handleRequest = (page) => async (req, res) => {
+    fs.readFile(path.resolve(`./src/public/${page}.html`), "utf8", (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send(`An error occurred.`)
+        }
+        return res.send(
+            data.replace(
+                `<header></header>`,
+                `<header>${ReactDOMServer.renderToString(React.createElement(Header))}</header>`
+            ).replace(
+                `<footer></footer>`,
+                `<footer>${ReactDOMServer.renderToString(React.createElement(Footer))}</footer>`
+            )
+        )
+    })
+}
 
-app.get('/about', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'about.html'))
-})
-
-app.get('/portfolio', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'portfolio.html'))
-})
-
-app.get('/blog', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'blog.html'))
-})
+app.get('/', handleRequest('home'));
+app.get('/about', handleRequest('about'));
+app.get('/portfolio', handleRequest('portfolio'));
+app.get('/blog', handleRequest('blog'));
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
