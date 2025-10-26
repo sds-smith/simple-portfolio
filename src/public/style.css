@@ -22,12 +22,15 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-image: var(--main-background);
 }
 
 header {
+  position: fixed;
   display: flex;
   justify-content: space-between;
   padding: 40px 60px;
+  width: 100vw;
   height: 140px;
   background-color: var(--maastricht-blue);
   color: var(--primary-font);
@@ -53,7 +56,8 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-image: var(--main-background);
+  margin-top: 140px;
+  /* background-image: var(--main-background); */
 }
 
 footer {
@@ -165,10 +169,16 @@ footer {
   min-height: calc(100vh - 110px);
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 6rem;
+  padding: 0 6rem 6rem 6rem;
 }
 
-#about > section {
+.scrollable-container {
+  height: calc(100vh - 300px);
+  overflow: scroll;
+  z-index: 10;
+}
+
+#about section {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -179,5 +189,6 @@ footer {
 }
 
 #about p {
-  width: 60%
+  width: 60%;
+  margin-top: 20px;
 }
