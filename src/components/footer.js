@@ -36,24 +36,22 @@ function Footer() {
                         key: href,
                         target: '_blank'
                     },
-                    [
-                        createElement(
-                            'div',
-                            { className: 'footer-link' },
-                            [
-                                createElement(
-                                    'h4',
-                                    { key: title },
-                                    title
-                                ),
-                                createElement(
-                                    'h5',
-                                    { key: url },
-                                    url
-                                ),
-                            ]
-                        ),
-                    ]
+                    createElement(
+                        'div',
+                        { className: 'footer-link' },
+                        [
+                            createElement(
+                                'h4',
+                                { key: title },
+                                title
+                            ),
+                            createElement(
+                                'h5',
+                                { key: url },
+                                url
+                            ),
+                        ]
+                    ),
                 )
             ))
         )
