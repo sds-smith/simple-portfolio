@@ -99,6 +99,7 @@ footer {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    opacity: 0.9;
     z-index: 1;
 }
 
@@ -140,8 +141,7 @@ footer {
 }
 
 #portfolio #circle2 {
-  top: 10vh;
-  right: 30vw;
+  display: none;
 }
 
 .glass {
@@ -164,6 +164,17 @@ footer {
   height: 450px;
   width: 350px;
   margin: 2rem;
+  transition: transform 0.8s;
+}
+
+#portfolio .glass:hover{
+  backdrop-filter: blur( 14px);
+  transform: rotateY(180deg);
+}
+
+#portfolio .glass:hover .portrait {
+  backdrop-filter: blur( 14px);
+  /* transform: rotateY(180deg); */
 }
 
 .card {
@@ -224,13 +235,21 @@ footer {
   justify-content: center;
   flex-wrap: wrap;
   padding: 4rem;
-  z-index: 10;
+  z-index: 9;
+}
+
+#portfolio h2 {
+  color: var(--primary-font);
+  padding-top: 2rem;
+  padding-left: 4rem;
+  z-index: 9;
 }
 
 #portfolio .container {
+  position: relative;
   width: 300px;
   height: 400px;
-  background-color: var(--clarinet);
+  background-color: rgba(77, 77, 77, 0.9);
   background-position: top;
   background-size: contain;
   background-repeat: no-repeat;
@@ -239,12 +258,18 @@ footer {
   cursor: pointer;
 }
 
-#wine-rack .container {
-  background-image: url("./assets/wine-rack.png");
+#counterpoint .container .portrait {
+  background-image: url("./assets/counterpoint.jpeg");
+  background-position: top;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+  width: 300px;
+  height: 280px;
 }
 
-#counterpoint .container {
-    background-image: url("./assets/counterpoint.jpeg");
+#wine-rack .container {
+  background-image: url("./assets/wine-rack.png");
 }
 
 #atj .container {
@@ -259,60 +284,90 @@ footer {
     background-image: url("./assets/boss.png");
 }
 
-#portfolio .overlay {
+#portfolio .label {
+  position: absolute;
+  bottom: 2rem;
+  left: 1rem;
+  letter-spacing: 3px;
   width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr 2fr 1fr;
+  color: var(--primary-font);  
+  font-size: 24px;
+  line-height: 40px;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+#portfolio .overlay {
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
   background: rgba(77, 77, 77, 0.9);
   opacity: 0;
-  transition: all 0.5s;
+  transition: transform 0.8s;
+}
+
+#portfolio .glass:hover .label {
+  opacity: 0;
+}
+
+#portfolio .glass:hover .overlay {
+  opacity: 1;
 }
 
 #portfolio .items {
-  padding-left: 20px;
   letter-spacing: 3px;
+  width: 100%;
+  color: var(--primary-font);
 }
 
-#portfolio .head {
-  font-size: 30px;
+#portfolio .title {
+  font-size: 24px;
   line-height: 40px;
-  transform: translateY(40px);
-  transition: all 0.7s;
-  hr {
-    display: block;
-    width: 0;
-    border: none;
-    border-bottom: solid 2px black;
-    position: absolute;
-    bottom: 0;
-    left: 20px;
-    transition: all .5s;
-  }
+  display: inline-block;
+  transform: scale(-1, 1);
 }
 
-#portfolio .price {
-  font-size: 22px;
-  line-height: 10px;
-  font-weight: bold;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s;
+#portfolio .subtitle {
+  font-size: 20px;
+  display: inline-block;
+  transform: scale(-1, 1);
 }
 
-#portfolio .container:hover .overlay {
-  opacity: 1;
-  & .head {
-    transform: translateY(0px);
-  }
-  & hr {
-    width: 75px;
-    transition-delay: 0.4s;
-  }
-  & .price {
-    transform: translateY(0px);
-    transition-delay: 0.3s;
-    opacity: 1;
-  }
+#portfolio .details {
+  font-size: 14px;
+  display: inline-block;
+  transform: scale(-1, 1);
+}
+
+hr {
+  display: block;
+  width: 100px;
+  border: none;
+  border-bottom: solid 2px var(--primary-font);
+}
+
+#portfolio .actions {
+  width: 100%;
+  display: inline-block;
+  transition: transform 0.8s;
+  transform: scale(-1, 1);
+  color: var(--primary-font);
+}
+
+.background-image {
+  background-image: url('./assets//IMG_7119.jpeg');
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.5;
 }
