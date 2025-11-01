@@ -258,6 +258,14 @@ footer {
   cursor: pointer;
 }
 
+#sds-smith .container {
+  background-image: url("./assets//IMG_7119.jpeg");
+}
+
+#wine-rack .container {
+  background-image: url("./assets/wine-rack.png");
+}
+
 #counterpoint .container .portrait {
   background-image: url("./assets/counterpoint.jpeg");
   background-position: top;
@@ -266,10 +274,6 @@ footer {
   background-origin: padding-box;
   width: 300px;
   height: 280px;
-}
-
-#wine-rack .container {
-  background-image: url("./assets/wine-rack.png");
 }
 
 #atj .container {
