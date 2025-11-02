@@ -14,12 +14,19 @@
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --mobile: (max-width: 600px);
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html {
+  @media only screen and (max-width: 980px) {
+    font-size: 32px;
+  }
 }
 
 body {
@@ -35,11 +42,56 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 40px 60px;
-  width: 100vw;
+  width: 100%;
   height: 140px;
   background-color: var(--maastricht-blue);
   color: var(--primary-font);
-  z-index: 10;
+  z-index: 11;
+
+  #hamburger, #menu {
+    display: none;
+  }
+
+  .nav-link {
+    margin: 0 10px;
+    font-family: var(--font-mono);
+  }
+
+  @media only screen and (max-width: 980px) {
+    height: 220px;
+
+    #hamburger {
+      display: unset;
+    }
+
+    .material-symbols-outlined {
+      font-size: 100px;
+    }
+
+    nav {
+      display: flex;
+      position: fixed;
+      top: 220px;
+      right: 0;
+      flex-direction: column;
+      align-items: end;
+      width: 45vw;
+      height: calc(100dvh - 220px - 220px);
+      background-color: var(--pacific-depths);
+      transition: transform 0.1s ease-in;
+      transform: scale(0, 1);
+      transform-origin: right;
+
+      .nav-link {
+        font-size: 50px;
+        padding: 50px;
+      }
+    }
+
+    #hamburger:has(#menu:checked) ~ nav {
+      transform: scale(1, 1);
+    }
+  }
 }
 
 a {
@@ -47,15 +99,17 @@ a {
   text-decoration: none;
 }
 
+#home-page #home-nav-link,
+#about-page #about-nav-link,
+#portfolio-page #portfolio-nav-link,
+#blog-page #blog-nav-link {
+  text-decoration: underline;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
-
-header .nav-link {
-  margin: 0 10px;
-  font-family: var(--font-mono);
 }
 
 main {
@@ -66,12 +120,26 @@ main {
 }
 
 footer {
+  position: static;
   display: flex;
   justify-content: space-evenly;
+  width: 100%;
+  height: 95px;
   padding: 20px;  
   background-color: var(--maastricht-blue);
   color: var(--primary-font);
   z-index: 10;
+
+  @media only screen and (max-width: 980px) {
+    position: fixed;
+    height: 220px;
+    bottom: 0;
+    left: 0;
+    
+    .footer-link h5 {
+      display: none;
+    }
+  }
 }
 
 .header-signature {
@@ -85,11 +153,17 @@ footer {
 
 .featured {
   flex: 1;
+  height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   z-index: 10;
+}
+
+#home {
+  display: flex;
+  flex-direction: column;
 }
 
 .geometric-background {
@@ -155,9 +229,9 @@ footer {
 }
 
 #home .glass {
-  position: absolute;
-  height: 60%;
+  height: calc((100vh - 140px - 95px) * 0.8);
   width: 75%;
+  z-index: 3;
 }
 
 #portfolio .glass {
@@ -174,7 +248,6 @@ footer {
 
 #portfolio .glass:hover .portrait {
   backdrop-filter: blur( 14px);
-  /* transform: rotateY(180deg); */
 }
 
 .card {
