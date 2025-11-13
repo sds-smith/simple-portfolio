@@ -14,7 +14,6 @@
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-  --mobile: (max-width: 600px);
 }
 
 * {
@@ -24,7 +23,7 @@
 }
 
 html {
-  @media only screen and (max-width: 980px) {
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
     font-size: 32px;
   }
 }
@@ -35,6 +34,10 @@ body {
   flex-direction: column;
   background-image: var(--main-background);
   font-family: var(--font-sans);
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    min-height: 100dvh;
+  }
 }
 
 header {
@@ -57,11 +60,12 @@ header {
     font-family: var(--font-mono);
   }
 
-  @media only screen and (max-width: 980px) {
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
     height: 220px;
 
     #hamburger {
       display: unset;
+      z-index: 21;
     }
 
     .material-symbols-outlined {
@@ -71,16 +75,18 @@ header {
     nav {
       display: flex;
       position: fixed;
-      top: 220px;
+      top: 0;
       right: 0;
       flex-direction: column;
       align-items: end;
-      width: 45vw;
-      height: calc(100dvh - 220px - 220px);
+      width: 75vw;
+      height: 100dvh;
+      padding-top: 6rem;
       background-color: var(--pacific-depths);
       transition: transform 0.1s ease-in;
       transform: scale(0, 1);
       transform-origin: right;
+      z-index: 20;
 
       .nav-link {
         font-size: 50px;
@@ -91,6 +97,11 @@ header {
     #hamburger:has(#menu:checked) ~ nav {
       transform: scale(1, 1);
     }
+  }
+
+  @media only screen and (max-width: 980px) and (orientation: landscape) {
+    height: 90px;
+    padding: 20px 60px;
   }
 }
 
@@ -130,7 +141,7 @@ footer {
   color: var(--primary-font);
   z-index: 10;
 
-  @media only screen and (max-width: 980px) {
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
     position: fixed;
     height: 220px;
     bottom: 0;
@@ -164,6 +175,14 @@ footer {
 #home {
   display: flex;
   flex-direction: column;
+}
+
+#home main {
+  height: calc(100vh - 140px - 95px);
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    height: calc(100dvh - 220px - 220px);
+  }
 }
 
 .geometric-background {
@@ -216,6 +235,12 @@ footer {
 
 #portfolio #circle2 {
   display: none;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    display: unset;
+    bottom: 25dvh;
+    right: 40px;
+  }
 }
 
 .glass {
@@ -232,6 +257,20 @@ footer {
   height: calc((100vh - 140px - 95px) * 0.8);
   width: 75%;
   z-index: 3;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    width: 90%;
+
+    .card {
+      width: 90%;
+    }
+  }
+
+  @media only screen and (max-width: 980px) and (orientation: landscape) {
+    height: 600px;
+    width: 80vw;
+    margin: 1rem 0;
+  }
 }
 
 #portfolio .glass {
@@ -239,6 +278,12 @@ footer {
   width: 350px;
   margin: 2rem;
   transition: transform 0.8s;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    height: 50dvh;
+    width: 80vw;
+    margin: 1rem 0;
+  }
 }
 
 #portfolio .glass:hover{
@@ -280,6 +325,10 @@ footer {
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 6rem 6rem 6rem;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    padding: 2rem;
+  }
 }
 
 .scrollable-container {
@@ -296,11 +345,16 @@ footer {
   position: relative;
   padding: 2rem 0 0 0;
   font-size: 1.25rem;
+  z-index: 10;
 }
 
 #about p {
   width: 60%;
   margin-top: 20px;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    width: unset;
+  }
 }
 
 #portfolio #card-container {
@@ -309,6 +363,11 @@ footer {
   flex-wrap: wrap;
   padding: 4rem;
   z-index: 9;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    margin-top: 40px;
+    padding: 0;
+  }
 }
 
 #portfolio h2 {
@@ -316,6 +375,11 @@ footer {
   padding-top: 2rem;
   padding-left: 4rem;
   z-index: 9;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    margin-top: 40px;
+  }
+  
 }
 
 #portfolio .container {
@@ -329,6 +393,11 @@ footer {
   background-origin: padding-box;
   border: 1px solid var(--maastricht-blue);
   cursor: pointer;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    height: 40vh;
+    width: 65vw;
+  }
 }
 
 #sds-smith .container {
@@ -347,6 +416,11 @@ footer {
   background-origin: padding-box;
   width: 300px;
   height: 280px;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    height: 28dvh;
+    width: 40vw;
+  }
 }
 
 #atj .container {
@@ -368,8 +442,8 @@ footer {
   letter-spacing: 3px;
   width: 100%;
   color: var(--primary-font);  
-  font-size: 24px;
-  line-height: 40px;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
   display: inline-block;
   transition: transform 0.2s;
 }
@@ -384,6 +458,11 @@ footer {
   background: rgba(77, 77, 77, 0.9);
   opacity: 0;
   transition: transform 0.8s;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    height: 40dvh;
+    width: 65vw;
+  }
 }
 
 #portfolio .glass:hover .label {
@@ -401,20 +480,20 @@ footer {
 }
 
 #portfolio .title {
-  font-size: 24px;
-  line-height: 40px;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
   display: inline-block;
   transform: scale(-1, 1);
 }
 
 #portfolio .subtitle {
-  font-size: 20px;
+  font-size: 1rem;
   display: inline-block;
   transform: scale(-1, 1);
 }
 
 #portfolio .details {
-  font-size: 14px;
+  font-size: 0.75rem;
   display: inline-block;
   transform: scale(-1, 1);
 }
@@ -447,4 +526,8 @@ hr {
   height: 100%;
   overflow: hidden;
   opacity: 0.5;
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    background-image: unset;
+  }
 }
