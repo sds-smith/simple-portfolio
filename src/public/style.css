@@ -250,6 +250,12 @@ footer {
   right: 10vw;
 }
 
+#portfolio, #about {
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    margin-bottom: 220px;
+  }
+}
+
 
 #portfolio #circle1 {
   bottom: -20px;
