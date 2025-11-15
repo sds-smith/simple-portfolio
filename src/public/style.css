@@ -264,8 +264,40 @@ footer {
   width: 75%;
   z-index: 3;
 
+  ul {
+    li {
+      display: flex;
+      align-items:center;
+      width: 800px;
+      min-height: 60px;
+      padding: 20px;
+      color: var(--primary-font);
+
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex: 1;
+        margin-left: 3rem;
+      }
+    
+      @media only screen and (max-width: 980px) and (orientation: portrait) {
+        height: 200px;
+      }
+    }
+
+    hr {
+      width: 100%;
+      border-bottom: 1px solid var(--primary-font);
+    }
+  }
+
   @media only screen and (max-width: 980px) and (orientation: portrait) {
     width: 90%;
+
+    ul {
+      width: 90%;
+    }
 
     .card {
       width: 90%;
@@ -299,29 +331,6 @@ footer {
 
 #portfolio .glass:hover .portrait {
   backdrop-filter: blur( 14px);
-}
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  display: flex;
-  align-items:center;
-  width: 800px;
-  min-height: 60px;
-  padding: 20px;
-  background-color: var(--clarinet);
-  color: var(--primary-font);
-
-  @media only screen and (max-width: 980px) and (orientation: portrait) {
-    height: 200px;
-  }
-}
-
-.card .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 1;
-  margin-left: 3rem;
 }
 
 .footer-link {
