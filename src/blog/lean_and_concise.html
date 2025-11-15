@@ -1,0 +1,125 @@
+<article id="post-container">
+  <h1>
+    <span>Lean and Concise: A Minimal Solution for a Small Portfolio Site</span>
+  </h1>
+  <p >
+    <span>The website you&rsquo;re currently viewing has taken a number of forms
+      over the years: from its first iteration written in HTML/CSS with
+      client-side vanilla JavaScript, to a monolithic React Class Component,
+      followed by a React 18 re-write with react-router-dom, and more recently
+      a Next.js juggernaut with app router and React Server Components.
+    </span>
+  </p>
+  <p class="c1 c3"><span class="c0"></span></p>
+  <p class="c1">
+    <span class="c0"
+      >Each iteration&rsquo;s changes leveraged some new or updated technology
+      meant to showcase some newly acquired skill or understanding, but with
+      no consideration given to the actual needs of the project. At some
+      point, all this tooling for four simple web pages began to feel a bit
+      like using a backhoe to plant a tulip.</span
+    >
+  </p>
+  <h2 class="c2" id="h.xjtotq9jt9ed">
+    <span class="c4">Ditching the Backhoe for the Hand Trowel</span>
+  </h2>
+  <p class="c1">
+    <span class="c0"
+      >I decided to scale back. This is a simple website, just four pages that
+      can and should exist in the browser as static HTML. I considered what
+      this would require, and challenged myself to develop the most minimal
+      node.js server with just enough server-side JavaScript to create four
+      tiny endpoints, each delivering static HTML and CSS files to the
+      browser; nothing more. Server-side dependencies would be kept to a
+      minimum. Above all, there would be no client-side JavaScript.
+    </span>
+  </p>
+  <h2 class="c2" id="h.jx3i42vbzi1v">
+    <span>Evaluating Tradeoffs: Express.js</span>
+  </h2>
+  <p class="c1">
+    <span class="c0"
+      >I opted to install Express.js for creating the server. A strong
+      argument can be made for foregoing this dependency and using
+      node.js&rsquo;s native http/https module. It is certainly true that this
+      would provide everything I would need for my tiny web server. But as we
+      know, in software development, everything is a tradeoff. Rarely (perhaps
+      never) is there one right choice; we&rsquo;re almost always left with a
+      judgement call. In this case, the tradeoff was between keeping node
+      modules as small as possible or keeping the code as concise as possible.
+      &nbsp;Here I chose to go with the convenience and brevity of
+      Express&rsquo;s built-in `static` middleware to keep the code a little
+      more lean and tight. The other option would also have been a good
+      choice.</span
+    >
+  </p>
+  <h2 class="c2" id="h.e5dvtg73bjaa">
+    <span>Evaluating Tradeoffs: A few Small Reusable Components</span>
+  </h2>
+  <p class="c1">
+    <span class="c0"
+      >Not long into the development of the HTML pages, something began to nag
+      at me. Too much repetitive code. All four pages used the same header.
+      All four pages used the same footer. Most of my career as a developer
+      has focused around seeing duplicative code and abstracting it into
+      something singular and reusable. Although the header was just a few
+      lines of HTML, and the footer about the same, the repetition of these
+      few lines across multiple files was unsettling and uncomfortable.
+      It&rsquo;s probably just me, but I couldn&rsquo;t quiet my inner DRY
+      (don&rsquo;t repeat yourself) directive. I had to do something about it.
+      I needed a reusable header and footer.</span
+    >
+  </p>
+  <p class="c1 c3"><span class="c0"></span></p>
+  <p class="c1">
+    <span class="c0"
+      >Among the handful of possible solutions, the simplest would be to
+      define an HTML string that could be interpolated into each parsed file
+      before delivery to the browser. It may not be the most elegant, but
+      would have been a fine choice. Ultimately though, I went with a
+      (surprisingly similar but) more obvious choice, one that&rsquo;s
+      practically synonymous with reusable UI components. Of course I&rsquo;m
+      referring to React. I&rsquo;d initially resisted the thought of
+      introducing React, which usually means introducing a bundler like
+      Webpack, and a transpiler like Babel &ndash; exactly the sort of bloat
+      and complexity I&rsquo;m trying to avoid.</span
+    >
+  </p>
+  <p class="c1 c3"><span class="c0"></span></p>
+  <p class="c1">
+    <span class="c0"
+      >Webpack is unnecessary here; since we know there will be zero
+      JavaScript sent to the client, any React will remain server-side. But
+      Babel . . no Babel, no JSX. What is React without JSX? Well, it&rsquo;s
+      still React, that&rsquo;s what. Maybe a little less concise, but in this
+      case, unlike the early judgement call over Express, I&rsquo;ll opt for
+      slightly less brevity in the React files in order to forego the need for
+      a transpiler. What I ended up with were three small reusable React
+      Components (a header, a footer, and later a background component)
+      written without JSX. On server startup, each HTML file is read using the
+      native file system module, and ReactDOM renders each of the three
+      Components into the resulting HTML string with a slightly older method
+      called `renderToString()` combined with `String.replace()`. Not
+      necessarily any more or less concise than simply repeating a few lines
+      of HTML, but it feels satisfying to stay DRY and also to employ
+      &ldquo;just enough&rdquo; server-side React to do so, in a creative way
+      that side-steps the need to over-complicate the project
+      dependencies.</span
+    >
+  </p>
+  <h2 class="c2" id="h.bcthhi9ihm2r">
+    <span class="c4">Evaluating Tradeoffs: The Blog Posts</span>
+  </h2>
+  <p class="c1">
+    <span
+      >I have a handful of blog posts from the previous (Next.js) incarnation
+      of this site. They&rsquo;re written in Markdown, and in the Next.js
+      project they were converted to HTML using a library (there are a few
+      choices for this; I used gray matter and markdown-to-jsx). I&rsquo;m not
+      so sure I want this added complexity for this purpose. As a temporary
+      solution, I wrote this post in Google Docs, downloaded it as a webpage
+      and extracted the HTML. It&rsquo;s not a long-term solution, but it buys
+      me a little time as I consider my options.</span
+    >
+  </p>
+</article>

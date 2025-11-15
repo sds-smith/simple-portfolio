@@ -38,15 +38,22 @@ function Hamburger() {
             createElement(
                 'label',
                 { htmlFor: 'menu', tabIndex: '0', key: 'label' },
-                createElement(
-                    'span',
-                    { className: "material-symbols-outlined" },
-                    'menu'
-                ),
+                [
+                    createElement(
+                        'span',
+                        { className: "material-symbols-outlined menu", key: 'menu' },
+                        'menu'
+                    ),
+                    createElement(
+                        'span',
+                        { className: "material-symbols-outlined close", key: 'close' },
+                        'close'
+                    ),
+                ]
             ),
             createElement(
                 'input',
-                { id: 'menu', type: 'checkbox', key: 'checkbox' }
+                { id: 'menu', type: 'checkbox', key: 'checkbox' },
             )
         ]
     )

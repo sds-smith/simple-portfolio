@@ -8,7 +8,7 @@ const Footer = require('./components/footer.js');
 const GeometricBackground = require('./components/geometric-background.js');
 
 const app = express();
-const PORT = 80;
+const PORT = 3561;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -40,7 +40,33 @@ Object.entries(pages).forEach(([key, page]) => {
 app.get('/', (req, res) => res.send(pages.home));
 app.get('/about', (req, res) => res.send(pages.about));
 app.get('/portfolio', (req, res) => res.send(pages.portfolio));
-app.get('/blog', (req, res) => res.send(pages.blog));
+app.get('/blog', (req, res) => {
+    const { post } = req.query;
+    if (post) {
+        let blog = pages.blog;
+        fs.readFile(path.resolve(`./src/blog/${post}.html`), "utf8", (err, data) => {
+            if (err) {
+                console.error(err);
+            }
+            blog = blog.replace(
+                `<a href="/blog?post=${post}">`,
+                `<a href="/blog" class="active">`
+            ).replace(
+                `<span id="${post}_x" class="material-symbols-outlined keyboard_arrow_x">keyboard_arrow_right</span>`,
+                `<span id="${post}_x" class="material-symbols-outlined keyboard_arrow_x">keyboard_arrow_left</span>`
+            ).replace(
+                `<span id="${post}_y" class="material-symbols-outlined keyboard_arrow_y">keyboard_arrow_down</span>`,
+                `<span id="${post}_y" class="material-symbols-outlined keyboard_arrow_y">keyboard_arrow_up</span>`
+            ).replace(
+                `<article id="post-container"></article>`,
+                data
+            )
+            return res.send(blog);
+        })
+    } else {
+        return res.send(pages.blog)
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
