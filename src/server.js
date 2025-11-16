@@ -49,8 +49,11 @@ app.get('/blog', (req, res) => {
                 console.error(err);
             }
             blog = blog.replace(
-                `<a href="/blog?post=${post}">`,
-                `<a href="/blog" class="active">`
+                `<h3 class="title ${post}">`,
+                `<h3 class="title ${post} active">`
+            ).replace(
+                `<a href="/blog?post=${post}">Continue reading`,
+                `<a href="/blog">`
             ).replace(
                 `<span id="${post}_x" class="material-symbols-outlined keyboard_arrow_x">keyboard_arrow_right</span>`,
                 `<span id="${post}_x" class="material-symbols-outlined keyboard_arrow_x">keyboard_arrow_left</span>`
