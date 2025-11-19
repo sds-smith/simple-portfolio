@@ -32,7 +32,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--soulstone-blue);
   background-image: var(--main-background);
   font-family: var(--font-sans);
 
@@ -360,6 +359,24 @@ footer {
   backdrop-filter: blur(14px);
 }
 
+.paper {
+  background-color: white;
+  background-image: linear-gradient(rgba(191, 150, 101, 0.7));
+
+  @media only screen and (min-width: 981px) {
+    box-shadow: 
+      0em 100px 500px -5px rgba(255,255,255,.5),
+      -1em 1em 3em 1em rgba(255,255,255,.2),
+      -5em 1em 30em 1em rgba(255,255,255,.2),
+      0em 2px 0 rgba(255,255,255,.7),
+      1.2em -0.8em 2em 0em #044134,
+      5.5em -1em 50em 0em #044134,
+      0px -5px 25px 0px #808f8c;
+  }
+
+  z-index: 3;
+}
+
 .footer-link {
   padding: 10px 20px;
   font-family: var(--font-mono);
@@ -378,10 +395,7 @@ footer {
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 6rem 6rem 6rem;
-
-  @media only screen and (max-width: 980px) {
-    color: var(--primary-font);
-  }
+  color: var(--secondary-font);
 
   @media only screen and (max-width: 980px) and (orientation: portrait) {
     padding: 2rem;
@@ -394,7 +408,7 @@ footer {
   z-index: 10;
 }
 
-#about .glass {
+#about .paper {
   width: 70%;
   margin-top: 4rem;
   padding: 0 2rem 2rem 2rem;
@@ -603,14 +617,13 @@ hr {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  color: var(--secondary-font);
 
   h1,
   h2,
   p {
     margin-bottom: 1rem;
   }
-
-
 
   #post-nav {
     width: 25%;
@@ -659,10 +672,6 @@ hr {
       hr {
         width: 100%;
         border-bottom: 1px solid var(--secondary-font);
-
-        @media only screen and (max-width: 980px) {
-          border-bottom: 1px solid var(--primary-font);
-        }
       }
 
       @media only screen and (min-width: 981px) {
@@ -673,13 +682,13 @@ hr {
     }
   }
 
-  .glass {
+  .paper {
     width: 70%;
     margin-top: 6rem;
-    padding: 2rem;
+    padding: 4rem;
   }
 
-  .glass:not(:has(h1)) {
+  .paper:not(:has(h1)) {
     display: none;
   }
 
@@ -689,7 +698,6 @@ hr {
 
   @media only screen and (max-width: 980px) {
     flex-direction: column;
-    color: var(--primary-font);
 
     #post-nav {
       width: 100%;
@@ -703,7 +711,7 @@ hr {
       }
     }
 
-    .glass, #post-container {
+    .paper, #post-container {
       width: 100%;
     }
 

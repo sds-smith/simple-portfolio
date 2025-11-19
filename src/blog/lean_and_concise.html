@@ -80,7 +80,7 @@
       (surprisingly similar but) more obvious choice, one that&rsquo;s
       practically synonymous with reusable UI components. Of course I&rsquo;m
       referring to React. I&rsquo;d initially resisted the thought of
-      introducing React, which usually means introducing a bundler like
+      introducing React, which usually means introducing a host of peer dependencies - particularly a bundler like
       Webpack, and a transpiler like Babel &ndash; exactly the sort of bloat
       and complexity I&rsquo;m trying to avoid.</span
     >
@@ -92,11 +92,11 @@
       JavaScript sent to the client, any React will remain server-side. But
       Babel . . no Babel, no JSX. What is React without JSX? Well, it&rsquo;s
       still React, that&rsquo;s what. Maybe a little less concise, but in this
-      case, unlike the early judgement call over Express, I&rsquo;ll opt for
+      case, unlike the earlier Express decision, I&rsquo;ll opt for
       slightly less brevity in the React files in order to forego the need for
       a transpiler. What I ended up with were three small reusable React
       Components (a header, a footer, and later a background component)
-      written without JSX. On server startup, each HTML file is read using the
+      written in "longhand" React. On server startup, each HTML file is read using the
       native file system module, and ReactDOM renders each of the three
       Components into the resulting HTML string with a slightly older method
       called `renderToString()` combined with `String.replace()`. Not
