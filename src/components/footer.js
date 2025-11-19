@@ -19,7 +19,7 @@ const links = [
     {
         href: "mailto:sds.smith24@gmail.com",
         title: 'Email',
-        url: 'sds.smith24@gmaill.com'
+        url: 'sds.smith24@gmail.com'
     },
 ]
 
