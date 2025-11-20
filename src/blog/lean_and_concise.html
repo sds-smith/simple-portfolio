@@ -88,10 +88,12 @@
   <p class="c1 c3"><span></span></p>
   <p>
     <span
-      >Webpack is unnecessary here; since we know there will be zero JavaScript
+      >But for this use-case, I may be able to side-step all of that.
+      After all, Webpack is unnecessary here. Since we know there will be zero JavaScript
       sent to the client, any React will remain server-side. But Babel . . no
-      Babel, no JSX. What is React without JSX? Well, it&rsquo;s still React,
-      that&rsquo;s what. Maybe a little less concise, but in this case, unlike
+      Babel, no JSX. And what is React without JSX? Well, it&rsquo;s still React,
+      that&rsquo;s what. It may be a little less concise without that syntax sugar we
+      usually take for granted. But in this case, unlike with
       the earlier Express decision, I&rsquo;ll opt for slightly less brevity in
       the React files in order to forego the need for a transpiler. What I ended
       up with were three small reusable React Components (a header, a footer,
@@ -99,7 +101,7 @@
       startup, each HTML file is read using the native file system module, and
       ReactDOM renders each of the three Components into the resulting HTML
       string with a slightly older method called `renderToString()` combined
-      with `String.replace()`. Not necessarily any more or less concise than
+      with JavaScript's `String.replace()`. Not necessarily any more or less concise than
       simply repeating a few lines of HTML, but it feels satisfying to stay DRY
       and also to employ &ldquo;just enough&rdquo; server-side React to do so,
       in a creative way that side-steps the need to over-complicate the project
