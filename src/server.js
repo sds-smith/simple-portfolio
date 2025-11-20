@@ -19,7 +19,7 @@ const pages = {
     blog: 'blog',
 }
 
-Object.entries(pages).forEach(([key, page]) => {
+const renderComponents = () => Object.entries(pages).forEach(([key, page]) => {
     fs.readFile(path.resolve(`./src/public/${page}.html`), "utf8", (err, data) => {
         if (err) {
             console.error(err);
@@ -37,10 +37,7 @@ Object.entries(pages).forEach(([key, page]) => {
     })
 })
 
-app.get('/', (req, res) => res.send(pages.home));
-app.get('/about', (req, res) => res.send(pages.about));
-app.get('/portfolio', (req, res) => res.send(pages.portfolio));
-app.get('/blog', (req, res) => {
+const handleBlog = (req, res) => {
     const { post } = req.query;
     if (post) {
         let blog = pages.blog;
@@ -69,7 +66,14 @@ app.get('/blog', (req, res) => {
     } else {
         return res.send(pages.blog)
     }
-});
+}
+
+renderComponents();
+
+app.get('/', (req, res) => res.send(pages.home));
+app.get('/about', (req, res) => res.send(pages.about));
+app.get('/portfolio', (req, res) => res.send(pages.portfolio));
+app.get('/blog', handleBlog);
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`)
