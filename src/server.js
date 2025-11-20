@@ -61,7 +61,7 @@ app.get('/blog', (req, res) => {
                 `<span id="${post}_y" class="material-symbols-outlined keyboard_arrow_y">keyboard_arrow_down</span>`,
                 `<span id="${post}_y" class="material-symbols-outlined keyboard_arrow_y">keyboard_arrow_up</span>`
             ).replace(
-                `<article id="post-container"></article>`,
+                `<article ></article>`,
                 data
             )
             return res.send(blog);

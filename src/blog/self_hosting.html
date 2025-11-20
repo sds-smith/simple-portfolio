@@ -1,0 +1,262 @@
+<article >
+  <h1>
+    <span>Self Hosting: Raspberry Pi and Cloudflare Tunnel</span>
+  </h1>
+  <p>
+    <span
+      >When the time came to host my little portfolio site and present it on the
+      public internet, I ran into a small obstacle, one which I&rsquo;d
+      anticipated. There aren&rsquo;t really any free cloud hosting platforms
+      any more for an Express server. Render may be the outlier, as it does
+      offer a free tier, but the server spins down after a period of inactivity.
+      This obviously causes some latency for the next visitor, as the server has
+      to start back up at request time. Not ideal for someone trying to promote
+      their web prowess.</span
+    >
+  </p>
+  <p><span></span></p>
+  <p>
+    <span
+      >So what, then, are my options? Pay-to-play on AWS, or on something a bit
+      more lightweight like Heroku? Those are viable options, but what if I
+      could self-host for free? I&rsquo;ve got this Raspberry Pi 3 sitting idle
+      on my desk. I mean, if the theme of this project is &ldquo;Lean and
+      Concise,&rdquo; I can&rsquo;t think of a more fitting solution than
+      self-hosting my tiny website from an equally tiny, credit card sized board
+      like this. What would it take to do so? I&rsquo;d have to consider:</span
+    >
+  </p>
+  <ul>
+    <li>
+      <span>Operating System</span>
+    </li>
+    <li>
+      <span>Developer interface</span>
+    </li>
+    <li>
+      <span>CPU, Memory and Storage utilization</span>
+    </li>
+    <li>
+      <span>Persistence, Availability, Reliability</span>
+    </li>
+    <li><span>Security</span></li>
+  </ul>
+  <p><span></span></p>
+  <p>
+    <span
+      >Ok, for such a tiny computer, the Raspberry Pi 3 B+ actually packs a
+      surprising punch with its 1.4GHz 64-bit quad-core processor and 1GB of
+      RAM. Plus, I&rsquo;ve opted for a 60G mini SD card for a decent amount of
+      storage. Nonetheless, I&rsquo;ll need to be mindful as I plan and develop
+      this server environment, as these resources could be exhausted pretty
+      quickly even with some of the presumed basics.</span
+    >
+  </p>
+  <h2>
+    <span>The Operating System</span>
+  </h2>
+  <p>
+    <span
+      >Raspberry Pi OS offers a few variations depending on use-case; the
+      obvious choice for mine is Raspberry Pi OS Lite. With no GUI (Graphical
+      User Interface, or &ldquo;desktop environment&rdquo;), this Linux Command
+      Line Interface is the most lightweight option and the perfect choice for
+      setting up the Pi as a home server. Even better, if I enable SSH, I can
+      remote in from my laptop&rsquo;s command line for the full headless-server
+      experience. I insert the Pi&rsquo;s mini SD card into my laptop and flash
+      OS Lite onto the card.</span
+    >
+  </p>
+  <h2>
+    <span>CPU, Memory and Storage Utilization</span>
+  </h2>
+  <p>
+    <span
+      >With the mini SD now in the Pi and the OS booted up, I use SSH to remote
+      in from my laptop&rsquo;s Command Line. I&rsquo;ve got full control of my
+      new server from my laptop. Now what? My portfolio project is stored in a
+      git repository on my laptop and synced to GitHub. How do I get it onto the
+      Pi? The typical scenario would be to begin building a development
+      environment on the new machine by installing </span
+    ><span>Node.js/NPM</span
+    ><span
+      >, installing git and cloning the repo . . . but this is the exact path to
+      overloading the Pi&rsquo;s resources before I even get started. I must
+      install Node and NPM in order to run the code, but the involuntary reflex
+      of installing git and cloning the repo down from GitHub may not be an
+      option here. To stay as lightweight as I can, I&rsquo;ll do without git,
+      at least on the Pi.</span
+    >
+  </p>
+  <p><span></span></p>
+  <p>
+    <span
+      >This means there will be some copy/pasting from my laptop to the Pi.
+      After installing Node, I move to the laptop and start the code migration
+      by making a second copy of the repo. I then remove node_modules and .git
+      from the copy, since these will not be making the migration over. Next, I
+      try to copy the entire project at once, but for some reason this is
+      unsuccessful. It seems I can copy/ paste files but not folders. So, on the
+      Pi, I create the folder structure that I need, then copy/ paste the
+      individual files. I install dependencies, and with node_modules returned
+      to the project, I still have about 52G of free space available on the 60G
+      mini SD card. Can I run the code? Absolutely, with very low CPU usage and
+      plenty of available RAM left.</span
+    >
+  </p>
+  <p><span></span></p>
+  <p>
+    <span
+      >There&rsquo;s still more to consider, as the site is currently only
+      available on my home network, only with the terminal open, and with no
+      firewall. Additionally, if I want to modify any of the code, I&rsquo;ll
+      have to use Vim &ndash; a little crude; wouldn&rsquo;t I rather use VS
+      Code? All of these considerations have the potential to tap more of the
+      Pi&rsquo;s resources, but I&rsquo;m definitely off to a good start.</span
+    >
+  </p>
+  <h2>
+    <span>The Development Environment</span>
+  </h2>
+  <p>
+    <span
+      >Luckily, Visual Studio Code offers an SSH extension. With this installed,
+      I&rsquo;m able to connect to the Pi and open my code repository, in VS
+      Code, on my laptop. Very cool and very convenient.</span
+    >
+  </p>
+  <p><span></span></p>
+  <p>
+    <span
+      >I find that the best development workflow is to have two VS Code windows
+      open, one with my local (GitHub-connected) repo and the other with my
+      remote (Pi) repo. As I make changes in the local copy, I can run the local
+      dev server with nodemon to view the changes. When it comes time to commit
+      and push to GitHub, I now have the added step of copying the contents of
+      the changed files and overwriting the contents of those files in the Pi
+      version.</span
+    >
+  </p>
+  <p><span></span></p>
+  <p>
+    <span>I suppose I could </span><span>forego</span
+    ><span
+      >&nbsp;the two copies and make my changes directly on the Pi via SSH from
+      &nbsp;my laptop&rsquo;s VS Code, but it&rsquo;s important to me that I
+      have a copy of this code available on GitHub. Plus, with the site live on
+      the internet, the Pi really needs to be treated as a production
+      environment, as any changes would require a server restart to be viewed,
+      and would be immediately visible online.</span
+    >
+  </p>
+  <h2>
+    <span>Persistence and Reliability</span>
+  </h2>
+  <p>
+    <span
+      >It&rsquo;s now time to think about how I will keep the server running all
+      the time. At this point, I&rsquo;ve got two npm scripts in my
+      package.json:</span
+    >
+  </p>
+  <ul>
+    <li>
+      <span>npm run dev, which calls &lsquo;nodemon src/</span
+      ><span>server.js</span><span>&rsquo; to run in watch mode</span>
+    </li>
+    <li>
+      <span>npm run server, which calls &lsquo;node src/</span
+      ><span>server.js</span><span>&rsquo; to run the server</span>
+    </li>
+  </ul>
+  <p><span></span></p>
+  <p>
+    <span
+      >Both of these options require the terminal to remain open and tied up
+      with the process running in the foreground. I would need something that
+      would not tie up the terminal, and that would in fact continue running
+      even with the terminal closed. And I would need it to restart if for any
+      reason it should stop running.
+    </span>
+  </p>
+  <p><span></span></p>
+  <p>
+    <span
+      >After doing a little research, I land on PM2 &ndash; &ldquo;Advanced
+      Production Process Manager for </span
+    ><span>Node.js</span
+    ><span
+      >&rdquo; &ndash; a small module that I can install globally on the Pi,
+      which precisely satisfies these requirements. I now have two new scripts
+      to leverage PM2&rsquo;s capabilities:</span
+    >
+  </p>
+  <ul>
+    <li>
+      <span>npm run start, which calls &lsquo;pm2 start src/</span
+      ><span>server.js</span><span>&rsquo;</span>
+    </li>
+    <li>
+      <span>npm run restart, which calls &lsquo;pm2 restart src/</span
+      ><span>server.js</span><span>&rsquo;</span>
+    </li>
+  </ul>
+  <p><span></span></p>
+  <p>
+    <span
+      >The restart command is useful for restarting the server after making code
+      changes; however it could be rendered unnecessary by appending the -watch
+      flag onto the start script. That will definitely be added in a future
+      update.</span
+    >
+  </p>
+  <h2 >
+    <span>Availability</span>
+  </h2>
+  <p>
+    <span
+      >So now the application has some level of persistence and reliability. It
+      will run in the background, it will restart in the event of system
+      failure, and it can even restart when the code changes. That&rsquo;s
+      great, but none of this exposes it to the public internet. The app is
+      still only available to devices connected to my home network.</span
+    >
+  </p>
+  <p><span></span></p>
+  <p>
+    <span
+      >To solve this, I&rsquo;ve elected to use a Cloudflare Tunnel. This is a
+      free service that offers a secure way to expose specific parts of your
+      network to the internet through outbound-only connections. After
+      installing &lsquo;cloudflared&rsquo; on the Pi, cloudflared established a
+      secure connection, or &ldquo;tunnel&rdquo;, to the Cloudflare DNS service,
+      which I was able to map to the port that my server is running on, and
+      associate with my url. Now when someone navigates to </span
+    ><span 
+      ><a
+        href="https://sds-smith.dev"
+        >sds-smith.dev</a
+      ></span
+    ><span
+      >, they are routed to Cloudflare&rsquo;s servers and are served my website
+      from my Pi on my home network via only outbound connections from the Pi to
+      Cloudflare. Cloudflare acts as a proxy that intercepts and, through the
+      use of the Tunnel, prevents the need for any inbound traffic to my server
+      (other than its own connection, of course).</span
+    >
+  </p>
+  <h2 ><span>Security</span></h2>
+  <p>
+    <span
+      >While the architecture of the Cloudflare Tunnel provides some built-in
+      security on the port the app is running on, it would be prudent to blanket
+      the Pi itself in some form of security. For this, I am using a lightweight
+      firewall that is available for Linux. I&rsquo;ve set the firewall to deny
+      all inbound and outbound connections by default, only allowing outbound
+      connections specifically to the IP addresses that cloudflared needs to
+      connect to. Likewise I&rsquo;ve allowed SSH connections only from one
+      specific device on my home network. Everything is locked down by default,
+      with only a few specific necessary connections allowed.</span
+    >
+  </p>
+</article>
