@@ -10,6 +10,9 @@
     url("data:image/svg+xml,%3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 329 329' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='7' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
     linear-gradient(rgba(191, 150, 101, 0.3)),
     linear-gradient(rgba(1, 28, 63, 1));
+  --paper-background:
+    linear-gradient(rgba(191, 150, 101, 0.4)),
+    linear-gradient(rgba(1, 28, 63, 0.5));
   --font-sans: "Inter", sans-serif;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
@@ -361,20 +364,16 @@ footer {
 
 .paper {
   background-color: white;
-  background-image: linear-gradient(rgba(191, 150, 101, 0.7));
+  background-image: var(--paper-background);
+  z-index: 3;
 
-  @media only screen and (min-width: 981px) {
-    box-shadow: 
-      0em 100px 500px -5px rgba(255,255,255,.5),
-      -1em 1em 3em 1em rgba(255,255,255,.2),
-      -5em 1em 30em 1em rgba(255,255,255,.2),
-      0em 2px 0 rgba(255,255,255,.7),
-      1.2em -0.8em 2em 0em #044134,
-      5.5em -1em 50em 0em #044134,
-      0px -5px 25px 0px #808f8c;
+  @media only screen and (max-width: 980px) {
+    width: 100vw;
   }
 
-  z-index: 3;
+  @media only screen and (min-width: 981px) {
+    box-shadow: 2px 3px 5px black;
+  }
 }
 
 .footer-link {
@@ -398,7 +397,7 @@ footer {
   color: var(--secondary-font);
 
   @media only screen and (max-width: 980px) and (orientation: portrait) {
-    padding: 2rem;
+    padding: 2rem 1rem;
   }
 }
 
@@ -610,6 +609,15 @@ hr {
   justify-content: space-between;
   color: var(--secondary-font);
 
+  code {
+    background-color: #EEEEEE;
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+    padding: 0.1rem 0.3rem;
+    border-radius: 5%;
+    margin: 5px;
+    font-size: 0.8rem;
+  }
+
   h1,
   h2,
   p {
@@ -692,6 +700,10 @@ hr {
     margin-top: 6rem;
     padding: 4rem;
 
+    @media only screen and (max-width: 980px) {
+      margin-top: 0;
+    }
+
     ul {
       padding-left: 2rem;
     }
@@ -739,10 +751,17 @@ hr {
       }
     }
 
+    ul {
+      font-size: 1.25rem;
+    }
   }
 
   @media only screen and (max-width: 980px) and (orientation: portrait) {
-    padding: 4rem 2rem;
+    padding: 4rem 1rem;
+
+    #post-nav {
+      padding: 0 2rem;
+    }
 
     p {
       font-size: 1.25rem;

@@ -1,4 +1,4 @@
-<article >
+<article>
   <h1>
     <span>Self Hosting: Raspberry Pi and Cloudflare Tunnel</span>
   </h1>
@@ -7,7 +7,7 @@
       >When the time came to host my little portfolio site and present it on the
       public internet, I ran into a small obstacle, one which I&rsquo;d
       anticipated. There aren&rsquo;t really any free cloud hosting platforms
-      any more for an Express server. Render may be the outlier, as it does
+      any more for an Express server. Render.com may be the outlier, as it does
       offer a free tier, but the server spins down after a period of inactivity.
       This obviously causes some latency for the next visitor, as the server has
       to start back up at request time. Not ideal for someone trying to promote
@@ -46,7 +46,7 @@
     <span
       >Ok, for such a tiny computer, the Raspberry Pi 3 B+ actually packs a
       surprising punch with its 1.4GHz 64-bit quad-core processor and 1GB of
-      RAM. Plus, I&rsquo;ve opted for a 60GB mini SD card for a decent amount of
+      RAM. Plus, I&rsquo;ve opted for a 64GB mini SD card for a decent amount of
       storage. Nonetheless, I&rsquo;ll need to be mindful as I plan and develop
       this server environment, as these resources could be exhausted pretty
       quickly even with some of the presumed basics.</span
@@ -99,9 +99,9 @@
       unsuccessful. It seems I can copy/ paste files but not folders. So, on the
       Pi, I create the folder structure that I need, then copy/ paste the
       individual files. I install dependencies, and with node_modules returned
-      to the project, I still have about 52GB of free space available on the 60GB
-      mini SD card. Can I run the code? Absolutely, with very low CPU usage and
-      plenty of available RAM left.</span
+      to the project, I still have about 52GB of free space available on the
+      64GB mini SD card. Can I run the code? Absolutely, with very low CPU usage
+      and plenty of available RAM left.</span
     >
   </p>
   <p><span></span></p>
@@ -142,11 +142,11 @@
     <span>I suppose I could </span><span>forego</span
     ><span
       >&nbsp;the two copies and make my changes directly on the Pi via SSH from
-      my laptop&rsquo;s VS Code, but it&rsquo;s important to me that I
-      have a copy of this code available on GitHub. Plus, with the site live on
-      the internet, the Pi really needs to be treated as a production
-      environment, as any changes would require a server restart to be viewed,
-      and would be immediately visible online.</span
+      my laptop&rsquo;s VS Code, but it&rsquo;s important to me that I have a
+      copy of this code available on GitHub. Plus, with the site live on the
+      internet, the Pi really needs to be treated as a production environment,
+      as any changes would require a server restart to be viewed, and would be
+      immediately visible online.</span
     >
   </p>
   <h2>
@@ -161,11 +161,11 @@
   </p>
   <ul>
     <li>
-      <span>npm run dev, which calls &lsquo;nodemon src/</span
+      <span><code>npm run dev</code>, which calls &lsquo;nodemon src/</span
       ><span>server.js</span><span>&rsquo; to run in watch mode</span>
     </li>
     <li>
-      <span>npm run server, which calls &lsquo;node src/</span
+      <span><code>npm run server</code>, which calls &lsquo;node src/</span
       ><span>server.js</span><span>&rsquo; to run the server</span>
     </li>
   </ul>
@@ -187,17 +187,17 @@
     ><span>Node.js</span
     ><span
       >&rdquo; &ndash; a small module that I can install globally on the Pi,
-      which precisely satisfies these requirements. I now have two new scripts
+      which precisely satisfies these requirements. I create two new npm scripts
       to leverage PM2&rsquo;s capabilities:</span
     >
   </p>
   <ul>
     <li>
-      <span>npm run start, which calls &lsquo;pm2 start src/</span
+      <span><code>npm run start</code>, which calls &lsquo;pm2 start src/</span
       ><span>server.js</span><span>&rsquo;</span>
     </li>
     <li>
-      <span>npm run restart, which calls &lsquo;pm2 restart src/</span
+      <span><code>npm run restart</code>, which calls &lsquo;pm2 restart src/</span
       ><span>server.js</span><span>&rsquo;</span>
     </li>
   </ul>
@@ -210,7 +210,7 @@
       update.</span
     >
   </p>
-  <h2 >
+  <h2>
     <span>Availability</span>
   </h2>
   <p>
@@ -227,16 +227,12 @@
     <span
       >To solve this, I&rsquo;ve elected to use a Cloudflare Tunnel. This is a
       free service that offers a secure way to expose specific parts of your
-      network to the internet through outbound-only connections. After
-      installing &lsquo;cloudflared&rsquo; on the Pi, cloudflared established a
-      secure connection, or &ldquo;tunnel&rdquo;, to the Cloudflare DNS service,
-      which I was able to map to the port that my server is running on, and
+      network to the internet through outbound-only connections. I
+      install &lsquo;cloudflared&rsquo; on the Pi, and a
+      secure connection, or &ldquo;tunnel&rdquo;, to the Cloudflare DNS service is established,
+      which I then map to the port that my server is running on, and
       associate with my url. Now when someone navigates to </span
-    ><span 
-      ><a
-        href="https://sds-smith.dev"
-        >sds-smith.dev</a
-      ></span
+    ><span><a href="https://sds-smith.dev">sds-smith.dev</a></span
     ><span
       >, they are routed to Cloudflare&rsquo;s servers and are served my website
       from my Pi on my home network via only outbound connections from the Pi to
@@ -245,7 +241,7 @@
       (other than its own connection, of course).</span
     >
   </p>
-  <h2 ><span>Security</span></h2>
+  <h2><span>Security</span></h2>
   <p>
     <span
       >While the architecture of the Cloudflare Tunnel provides some built-in
