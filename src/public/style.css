@@ -153,7 +153,11 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 140px;
+  margin-top: 140px;  
+  
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    margin-top: 220px;
+  }
 }
 
 footer {
@@ -188,16 +192,6 @@ footer {
   margin: 0px;
 }
 
-.featured {
-  flex: 1;
-  height: inherit;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  z-index: 10;
-}
-
 #home {
   display: flex;
   flex-direction: column;
@@ -205,6 +199,19 @@ footer {
 
 #home main {
   height: calc(100vh - 140px - 95px);
+
+  @media only screen and (max-width: 980px) and (orientation: portrait) {
+    height: calc(100dvh - 220px -220px);
+  }
+}
+
+.featured {
+  height: calc(100vh - 140px - 95px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 
   @media only screen and (max-width: 980px) and (orientation: portrait) {
     height: calc(100dvh - 220px - 220px);
@@ -323,6 +330,7 @@ footer {
 
   @media only screen and (max-width: 980px) and (orientation: portrait) {
     width: 90%;
+    height: calc((100svh - 220px - 220px) * 0.8);
 
     ul {
       width: 90%;
