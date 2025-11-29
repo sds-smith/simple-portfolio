@@ -94,11 +94,29 @@ header {
       }
     }
 
+    #nav-backdrop {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100vw;
+      height: 100dvh;
+      /* background-color: rgba(145, 148, 153, 0.7); */
+      background-color: rgba(76, 80, 87, 0.7);
+
+      /* transition: transform 0.1s ease-in; */
+      transition: transform;
+      transform: scale(0, 1);
+      transform-origin: right;
+      z-index: 20;    
+    }
+
     .close {
       display: none;
     }
 
-    #hamburger:has(#menu:checked)~nav {
+    #hamburger:has(#menu:checked)~nav,
+    #hamburger:has(#menu:checked)~#nav-backdrop {
       transform: scale(1, 1);
     }
 

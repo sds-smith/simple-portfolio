@@ -14,7 +14,11 @@ function Header() {
                         createElement('h3', {key: 'title'}, 'Software Engineer'),
                     ]
                 ),
-                createElement(Hamburger, {key: 'hamburger'}),
+                createElement(Hamburger, {key: 'hamburger'}), 
+                createElement(
+                    'div',
+                    {key: 'backdrop', id: 'nav-backdrop'},
+                ),
                 createElement(
                     'nav', 
                     {key: 'nav'},
