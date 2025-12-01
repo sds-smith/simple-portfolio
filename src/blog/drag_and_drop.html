@@ -1,0 +1,90 @@
+<article > 
+  <h1 >
+    <span >Drag &amp; Drop, Pop &amp; Swap (Part 1)</span>
+  </h1>
+  <p >
+    <span 
+      >A few years ago I developed a small web app that my family uses to
+      exchange gift ideas. It&rsquo;s just a small React frontend backed by a
+      document database. Each of us (my wife, our two kids and I) maintains a
+      wish list in the app that the others can view on our phones as a
+      vertical stack of individual item cards.</span
+    >
+  </p>
+  <p >
+    <span 
+      >Recently my son Nathan presented me with some new
+      &ldquo;requirements&rdquo; for the application, chief among them the
+      ability to re-order his list by priority. Specifically, he wanted to
+      have the ability to grab an individual item card and move it to a new
+      position within the list.</span
+    >
+  </p>
+  <p >
+    <span 
+      >Why not? The app was due for a reexamination and update anyway. I
+      seized the opportunity to clean up the architecture and logic a bit,
+      upgrade to React 19 and replace the original Chakra-UI components with
+      MaterialUI. I then developed some of the simpler new features like the
+      ability to categorize and the ability to list a price. Finally I was
+      ready to consider the heavy lift of implementing drag-and-drop to
+      re-order a wish list.
+    </span>
+  </p>
+  <p >
+    <span
+      >Implementing drag and drop functionality is not a simple endeavor.
+      However, its use-cases are becoming more and more ubiquitous as users
+      increasingly expect to be able to interact with the UI in this way. It
+      will be good to get my hands dirty with this and have at least one
+      drag-and-drop strategy in my toolbelt.</span
+    >
+  </p>
+  <h3 >
+    <span >The Browser&rsquo;s built-in Drag and Drop API</span>
+  </h3>
+  <p >
+    <span 
+      >When I think of drag-and-drop UI elements (like cards for instance),
+      the first thing that comes to mind is Atlassian products like Jira.
+      Atlassian uses their own (open-source) JavaScript &nbsp;library called
+      Pragmatic Drag and Drop. I go to their docs but I don&rsquo;t even get
+      past the intro paragraph before a reference is made to the
+      browser&rsquo;s built-in drag and drop API. Maybe I should check that
+      out first.</span
+    >
+  </p>
+  <p >
+    <span>I head over to the MDN Docs site and read up on the </span
+    ><span 
+      ><a
+        href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API"
+        >HTML Drag and Drop API</a
+      ></span
+    ><span 
+      >. Ok, after reading I&rsquo;m glad to have gained a little background
+      understanding on the underlying API but it&rsquo;s clear I&rsquo;ll be
+      using a library for this.
+    </span>
+  </p>
+  <p >
+    <span 
+      >The native API involves a number of concepts, including the draggable
+      element, drop target, underlying data to be mutated, and seven different
+      drag events. There&rsquo;s an in-browser drag data store and special
+      properties of the drag event like dataTransfer and target.ownerDocument
+      to name just two. Some elements are draggable by default while others
+      need to have their `draggable` attribute set to true. And of course we
+      would need to define drag behavior with handlers for the many events on
+      not only the draggable element but also the drop target element.</span
+    >
+  </p>
+  <p >
+    <span 
+      >It might be worthwhile at a later date to try my hand at a custom
+      solution that leverages this API, but today I&rsquo;ll opt to get my
+      feet wet with a library that abstracts much of this away.</span
+    >
+  </p>
+  <p ><span> More to come in Part 2 . . .</span></p>
+</article>
